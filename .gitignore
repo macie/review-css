@@ -1,0 +1,19 @@
+# Whitelist for Plain Old Semantic HTML
+
+# Ignore everything
+*
+
+# But not these files...
+!/.gitignore
+
+!*.css
+!*.html
+
+!README.md
+!LICENSE
+
+!Makefile
+
+# ...even if they are in subdirectories
+!*/
+
