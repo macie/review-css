@@ -1,0 +1,288 @@
+/*
+  review.css v2023.06.22
+  <https://github.com/macie/review-css>
+  MIT license
+*/
+
+/* DEFAULTS */
+:root {
+  --color-text: #0a0a0a;
+  --color-background: #fffffb;
+  --color-hyperlink: mediumblue;
+  --color-highlighted: peachpuff;
+  --color-selected: #fbf46d;
+
+  font-family: serif;
+  color: var(--color-text);
+  background: var(--color-background);
+  width: 60ch;
+  margin: 1rem auto;
+  
+  counter-reset: figure;
+  counter-reset: form;
+  counter-reset: header1;
+  counter-reset: table;
+}
+
+[lang] {
+  hyphens: auto;
+  text-align: justify;
+}
+
+/* HEADER */
+header, nav {
+  font-size: 0.9rem;
+  margin: 1.5rem 6ch;
+}
+
+header h1 {
+  text-transform: none;
+  font-size: 1.25rem;
+}
+
+header h1::before {
+  content: "";
+}
+
+nav ul {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+nav ul>li::marker {
+  content: ""
+}
+
+/* CHAPTERS */
+h1, h2, h3 {
+  text-align: center;
+  font-weight: bold;
+  font-size: inherit;
+}
+
+h1 {
+  text-transform: uppercase;
+  counter-increment: header1;
+  counter-reset: header2;
+}
+
+h1::before {
+  content: counter(header1, upper-roman) ". ";
+}
+
+h2 {
+  text-transform: none;
+  counter-increment: header2;
+  counter-reset: header3;
+}
+
+h2::before {
+  content: counter(header2, upper-latin) ". ";
+}
+
+h3 {
+  font-style: italic;
+  counter-increment: header3;
+  counter-reset: header4;
+}
+
+h3::before {
+  content: counter(header3, decimal) ". ";
+}
+
+h4, h5, h6 {
+  font-style: italic;
+  font-weight: normal;
+  font-size: inherit;
+  counter-increment: header4;
+  display: inline;
+  margin: 0 0.5ch 0 2ch;
+}
+
+:is(h4, h5, h6)::before {
+  content: "(" counter(header4, lower-latin) ") "
+}
+
+:is(h4, h5, h6)::after {
+  content: "."
+}
+
+:is(h4, h5, h6)+p {
+  display: inline;
+}
+
+:is(h4, h5, h6)+p::after {
+  display: block;
+  content: "";
+  margin-bottom: 1rem;
+}
+
+/* TEXT CONTENT */
+p {
+  text-indent: 2ch;
+}
+
+a {
+  color: var(--color-hyperlink);
+  text-decoration: none;
+}
+
+a:hover, mark {
+  padding: 0.1rem 0.3ch;
+  margin: auto -0.3ch;
+}
+
+a:hover {
+  background: var(--color-selected);
+}
+
+mark {
+  background: var(--color-highlighted);
+}
+
+abbr {
+  cursor: help;
+}
+
+blockquote {
+  font-style: italic;
+  margin: 0 3ch;
+}
+
+blockquote cite {
+  display: block;
+  text-align: right;
+}
+
+ol, ul {
+  padding: 0 0 0 3ch;
+}
+
+ul {
+  margin-left: -0.4ch;
+}
+
+ol > li::marker {
+  content: "(" counter(list-item, decimal) ") "
+}
+
+ol ol > li::marker {
+  content: "(" counter(list-item, lower-latin) ") "
+}
+
+ul > li::marker {
+  content: "— "
+}
+
+table {
+  border-top: double;
+  border-bottom: double;
+  counter-increment: table;
+}
+
+caption {
+  text-align: left; 
+}
+
+caption::before {
+  content: "TABLE " counter(table, upper-roman) ".";
+  padding-right: 1ch;
+}
+
+thead {
+  border-bottom: 1px solid;
+}
+
+tfoot {
+  border-top: 1px solid;
+}
+
+td, th {
+  padding: 0.2rem 0.25ch;
+  text-align: center;
+}
+
+/* FORMS */
+button, input:is([type="submit"], [type="button"], [type="reset"]) {
+  background: none;
+  color: var(--color-hyperlink);
+  font-family: inherit;
+  font-size: inherit;
+  font-variant: small-caps;
+  border: none;
+  outline: 1px solid;
+  cursor: pointer;
+}
+
+:is(button, input[type="submit"], input[type="button"], input[type="reset"]):hover {
+  background: var(--color-selected);
+}
+
+input, select {
+  font-family: inherit;
+  font-size: inherit;
+  background: none;
+  border: none;
+  border-bottom: dashed 1px;
+  margin-bottom: -1px;
+  accent-color: var(--color-text);
+}
+
+input[type="color"] {
+  height: 1.3rem;
+}
+
+:is(button, input, select):hover {
+  border: none;
+  outline: 1px solid;
+}
+
+textarea {
+  vertical-align: baseline;
+}
+
+form {
+  counter-increment: form;
+  counter-reset: fields;
+}
+
+form::before {
+  content: "FORM " counter(form, upper-roman) ".";
+  padding-right: 1ch;
+}
+
+fieldset {
+  border: none;
+  counter-increment: fields;
+}
+
+legend {
+  font-style: italic;
+  position: relative;
+  top: 0.45rem;
+}
+
+legend::before {
+  content: "FIELDS " counter(fields, decimal) ".";
+  padding-right: 1ch;
+}
+
+/* MULTIMEDIA */
+audio, canvas, figure, iframe, img, meter, progress, video {
+  width: 100%;
+}
+
+figure {
+  counter-increment: figure;
+}
+
+figcaption::before, figure::after {
+  content: "FIG. " counter(figure, decimal) ".";
+  padding-right: 1ch;
+}
+
+svg {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
