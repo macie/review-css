@@ -1,7 +1,6 @@
-/*
-  review.css v2023.06.22
-  <https://github.com/macie/review-css>
-  MIT license
+/*!
+  review.css v2023.06.23
+  MIT license <https://github.com/macie/review-css>
 */
 
 /* DEFAULTS */
@@ -16,11 +15,15 @@
   color: var(--color-text);
   background: var(--color-background);
   width: 60ch;
-  margin: 1rem auto;
-  
+  margin: 0 auto;
+
   counter-reset: figure;
   counter-reset: form;
-  counter-reset: header1;
+  counter-reset: section;
+  counter-reset: subsection;
+  counter-reset: subsubsection;
+  counter-reset: paragraph;
+  counter-reset: subparagraph;
   counter-reset: table;
 }
 
@@ -29,96 +32,91 @@
   text-align: justify;
 }
 
-/* HEADER */
-header, nav {
+/* HEADERS */
+body > header {
+  width: 100%;
+  border-bottom: 2px solid;
+  display: flex;
+  justify-content: space-between;
+}
+
+main > header {
   font-size: 0.9rem;
-  margin: 1.5rem 6ch;
+  margin: auto 6ch;
 }
 
-header h1 {
+/* TITLES */
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
   text-transform: none;
-  font-size: 1.25rem;
 }
 
-header h1::before {
-  content: "";
-}
-
-nav ul {
-  margin-left: 0;
-  padding-left: 0;
-}
-
-nav ul>li::marker {
-  content: ""
-}
-
-/* CHAPTERS */
-h1, h2, h3 {
+h1, h2, h3, h4 {
   text-align: center;
   font-weight: bold;
-  font-size: inherit;
 }
 
 h1 {
-  text-transform: uppercase;
-  counter-increment: header1;
-  counter-reset: header2;
-}
-
-h1::before {
-  content: counter(header1, upper-roman) ". ";
+  font-size: 1.25rem;
 }
 
 h2 {
-  text-transform: none;
-  counter-increment: header2;
-  counter-reset: header3;
+  text-transform: uppercase;
+  counter-increment: section;
+  counter-reset: subsection;
 }
 
 h2::before {
-  content: counter(header2, upper-latin) ". ";
+  content: counter(section, upper-roman) ". ";
 }
 
 h3 {
-  font-style: italic;
-  counter-increment: header3;
-  counter-reset: header4;
+  counter-increment: subsection;
+  counter-reset: subsubsection;
 }
 
 h3::before {
-  content: counter(header3, decimal) ". ";
+  content: counter(subsection, upper-latin) ". ";
 }
 
-h4, h5, h6 {
+h4 {
+  font-style: italic;
+  counter-increment: subsubsection;
+  counter-reset: paragraph;
+}
+
+h4::before {
+  content: counter(subsubsection, decimal) ". ";
+}
+
+h5, h6 {
   font-style: italic;
   font-weight: normal;
-  font-size: inherit;
-  counter-increment: header4;
-  display: inline;
-  margin: 0 0.5ch 0 2ch;
+  display: inline-block;
+  margin: 1.5rem 0.5ch 0 2ch;
+  counter-increment: paragraph;
 }
 
-:is(h4, h5, h6)::before {
-  content: "(" counter(header4, lower-latin) ") "
+:is(h5, h6)::before {
+  content: "(" counter(paragraph, lower-latin) ") "
 }
 
-:is(h4, h5, h6)::after {
+:is(h5, h6)::after {
   content: "."
 }
 
-:is(h4, h5, h6)+p {
+:is(h5, h6)+p {
   display: inline;
 }
 
-:is(h4, h5, h6)+p::after {
-  display: block;
+:is(h5, h6)+p::after {
   content: "";
-  margin-bottom: 1rem;
+  display: block;
 }
 
 /* TEXT CONTENT */
 p {
+  margin: 0;
   text-indent: 2ch;
 }
 
@@ -181,7 +179,7 @@ table {
 }
 
 caption {
-  text-align: left; 
+  text-align: left;
 }
 
 caption::before {
