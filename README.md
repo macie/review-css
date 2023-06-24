@@ -4,7 +4,7 @@
 
 ## TODO
 
-- verify vertical alignment
+- verify vertical rhythm (with something like: `background-image: repeating-linear-gradient(transparent 0 calc(1rem - 1px), #80000040 calc(1rem - 1px) 1rem);`)
 - create test HTML files (with tables, source code, footnotes, etc.)
 - consider using [GUST fonts](https://www.gust.org.pl/projects/e-foundry)
 - create build process (with [minify](https://github.com/tdewolff/minify))
